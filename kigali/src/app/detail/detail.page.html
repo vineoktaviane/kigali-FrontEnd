@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="caret-back-outline" color="new">Back</ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+ 
+  
+    
+  
+  <div class="wrapper">
+    <div class="content">
+        <ion-row class="ion-align-items-start">
+          <ion-col size="2">
+            <div style="padding-top: 20px;">
+            <img src="assets/icon/pharmacyimage.jpg" alt="{{pharmacy.name}}"/>
+          </div>
+          </ion-col>
+          <ion-col size="10">
+            <h5 style="color:#69bb7b;">{{pharmacy.name}}<br>
+              <span style="font-size: small;">{{pharmacy.address | uppercase }}</span></h5>
+              <div *ngIf="showMore ==true">
+              <ul class="ion-no-padding ion-no-margin">
+                <li style="font-size: small;"><b>Insurances Covered:</b></li>
+                <li style="font-size: small;" *ngFor="let insurance of insurances">
+                  {{ insurance }}
+                </li>
+              </ul>
+              <p style="font-size: small; padding-bottom: 0 !important; margin-bottom: 0!important;"><b>Opening times:</b></p>
+              <ul *ngFor="let array of openingtimes">
+                <li style="font-size: small;">
+                  {{array.day}} : {{array.open}}.00 - {{array.close}}.00
+                </li>
+              </ul>
+            </div>
+              <ion-row>
+                  <ion-button color="new"  (click)="call()">Call</ion-button>
+                <!-- 
+                  <ion-button color="new" class="button-center">Chat</ion-button>
+                 -->
+                  <ion-button color="new" (click)="navigate()">Navigate</ion-button>
+              </ion-row>
+          </ion-col>
+          
+            <div class="travelTime1" style="font-size: smaller;"><ion-icon name="walk-outline"></ion-icon> {{walkingMinutes}} </div>
+            <div class="travelTime2" style="font-size: smaller;"><ion-icon name="car-outline"></ion-icon> {{carMinutes}} </div>
+            
+        </ion-row> 
+        <div class="ion-text-center ion-no-margin ion-no-padding" (click)="Toggle()">
+          <ion-icon name="caret-down-outline" size="large" color="new" *ngIf="showDown==true"></ion-icon>
+          <ion-icon name="caret-up-outline" size="large" color="new" *ngIf="showUp==true"></ion-icon>
+        </div>
+      </div>
+      
+        
+      
+    <div id="map" #mapHome style="height: 100vh; width:100%;"></div>
+  </div>
+    
+  
+</ion-content>

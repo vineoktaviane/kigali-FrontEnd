@@ -1,0 +1,83 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar color="new">
+    <ion-title>
+      Scan Medicine
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+     <ion-row class="ion-align-items-center"  style="text-align: center; justify-content: center;">
+      <p>place barcode inside the frame to scan. Please avoid shake to get the result quickly</p>
+      <img src="assets/icon/barcodeicon.png" style="height:300px; width:auto; ">
+      <ion-col class="ion-text-center">
+        <ion-button color="new" (click)="Scan()" class="button-center">Scan Now</ion-button>
+        <ion-button color="new" (click)="showHistory()" class="button-center">Show history</ion-button>
+      </ion-col>
+    </ion-row> 
+
+    
+      <div class="reminderBox ion-padding-horizontal" style="margin-top: 16px;" *ngIf="scannedCode">
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col class="ion-no-padding ion-no-margin" size="11">
+            <ion-row class="ion-no-padding ion-no-margin"> 
+              <ion-col size = "9" class="ion-no-padding ion-no-margin">
+                <h5 style="padding-top: 0px !important; margin-bottom: 0!important; padding-bottom: 0!important; color: #69bb7b">{{medicineName}}</h5>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <p class="detailReminder">
+          <span style="font-size: smaller;">DESCRIPTION</span><br> 
+          <span style="color:grey; font-size: smaller;">{{medicineDescription}}</span><br><br>
+          <span style="font-size: smaller;">DOSAGE</span><br> 
+          <span style="color:grey; font-size: smaller;">{{medicineDosage}}</span><br><br>
+          <span style="font-size: smaller;">SIDE EFFECTS</span><br>
+          <span style="color:grey; font-size: smaller;">{{medicineSideEffect}}</span>
+        </p>
+    </div>
+
+  
+  </ion-grid>
+
+  <div class="scanHistoryContainer" *ngIf="show==true">
+    <ion-item lines="none" (click)="hideHistory()">
+      <ion-icon name="chevron-back-outline" style="color: #69bb7b;"></ion-icon> 
+      <span class="text">Back</span>
+    </ion-item>
+    
+    <p class="ion-padding-horizontal" style="font-size: smaller; color: grey;" *ngIf="noScanHistory==true">You dont have any barcode scan history</p>
+
+    <ion-list *ngFor="let barcode of barcodeData">
+      <div class="reminderBox ion-padding-horizontal">
+          
+            <ion-row class="ion-no-padding ion-no-margin">
+              <h5 style="padding-top: 0px !important; margin-bottom: 0!important; padding-bottom: 0!important; color: #69bb7b">{{barcode.name}}</h5>
+            
+              <div class="remindericon" (click)="openReminder()">
+                <ion-icon name="alarm-outline" color="new" class="delete"></ion-icon>
+              </div>
+            
+              <div class="deleteicon" (click)="deleteBarcodeHistory(barcode.id)" >
+                <ion-icon name="trash-outline" color="new" class="delete" ></ion-icon>
+              </div>
+              </ion-row>
+          
+         
+          <p class="detailReminder">
+            <span style="font-size: smaller;">DESCRIPTION</span><br> 
+            <span style="color:grey; font-size: smaller;">{{barcode.description}}</span><br><br>
+            <span style="font-size: smaller;">DOSAGE</span><br> 
+            <span style="color:grey; font-size: smaller;">{{barcode.dosage}}</span><br><br>
+            <span style="font-size: smaller;">SIDE EFFECTS</span><br>
+            <span style="color:grey; font-size: smaller;">{{barcode.effect}}</span>
+          </p>
+      </div>
+      </ion-list>
+      <ion-button type="submit" color="new" style="margin: 16px auto 500px 16px" (click)="hideHistory()">Close</ion-button> 
+  </div>
+  
+</ion-content>
+
+

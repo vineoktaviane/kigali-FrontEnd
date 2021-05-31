@@ -1,0 +1,102 @@
+.food
+{
+    border:solid 1px rgb(126, 121, 121);
+    border-radius: 10px;
+    width: 80px;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    font-size: smaller;
+    margin-left: 12px;
+}
+
+.foodicon
+{
+    height: 40px;
+}
+.foodicon2
+{
+    height: 30px;
+}
+.reminderBox
+{
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 0 16px 0 16px;
+}
+#notification
+{
+    border:solid 1px rgb(126, 121, 121);
+    padding: 10px;
+    margin:16px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#addReminder
+{
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    background-color: white;
+    padding: 10px;
+}
+
+.unselected
+{
+border: solid 1px;
+border-color: grey;
+border-radius: 10px;
+}
+
+.selected
+{
+border: solid 2px;
+border-color: var(--ion-color-new);
+border-radius: 10px;
+color:var(--ion-color-new) ;
+}
+
+.labelFilter {
+    min-width: 550px !important;
+    font-size: 18px;
+  }
+
+  .addReminderContainer
+  {
+      position: absolute;
+      width: 100%;
+      padding-right: 40px;
+      padding-top: 20px;
+      margin-right: 20px;
+      top: 50px;
+      z-index: 99;
+      background-color: white;
+      height: 100%;;
+  }
+  .buttonReminder
+  {
+      margin-bottom: 100px;
+      margin-left: 12px;
+  }
+  .delete
+  {
+      font-size: 20px; 
+      margin-top: 16px;
+  }
+  .detailReminder
+  {
+      font-size: smaller;
+      padding-top: 0!important;
+      margin-top: 0 !important;
+  }
+  .question
+  {
+      font-size:smaller;
+      color:var(--ion-color-new); 
+  }
+
+  .plusButton
+  {
+        font-size: 50px;
+  }

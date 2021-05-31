@@ -1,0 +1,83 @@
+<!-- home.page.html -->
+
+<ion-content [fullscreen]="true" >
+  <div class="user-input">
+    
+  <ion-list class="ion-margin-horizontal">
+    <h2 id="mpharma">M-Pharma</h2>
+    <p id="mpharmadetail">Pharmacy Finder App</p>
+    <ion-row>
+      <ion-item lines="inset">
+        <ion-label class="labelFilter" color="new" position="stacked">Are you looking for specific medicine?</ion-label>
+        <ion-input clearInput [(ngModel)]="searchMedicine" (ionChange)="setFilteredResult()" lines="inset"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+    <ion-item lines="inset">
+      <ion-label class="labelFilter" position="stacked" color="new">Are you looking for specific insurance?</ion-label>
+      <ion-select interface="popover" [(ngModel)]="searchInsurance" (ionChange)="setFilteredResult()">
+      <ion-select-option value="">No Preference</ion-select-option>
+      <ion-select-option value="one">One</ion-select-option>
+      <ion-select-option value="two">Two</ion-select-option>
+      <ion-select-option value="three">Three</ion-select-option>
+      </ion-select>
+    </ion-item>
+    </ion-row>
+     
+    <!-- <div class="ion-margin-top distance">
+      <ion-button class="bd" color="new" [ngClass]="{'unselected':unselectedkm,'selected':selectedkm}" (click)="noMax()" fill="clear" >All</ion-button>
+      <ion-button class="bd" color="new" [ngClass]="{'unselected':unselectedkm5,'selected':selectedkm5}" (click)="km2()" fill="clear" >&lt;2Km</ion-button>
+      <ion-button class="bd" color="new" [ngClass]="{'unselected':unselectedkm10,'selected':selectedkm10}" (click)="km5()" fill="clear" >&lt;5Km</ion-button>
+      <ion-button class="bd" color="new" [ngClass]="{'unselected':unselectedkm20,'selected':selectedkm20}" (click)="km10()" fill="clear" >&lt;10Km</ion-button>
+    </div> -->
+    <!-- <ion-button color="new" (click)="setFilteredResult()" fill="clear">search</ion-button> -->
+
+    <ion-item class="ion-padding-left" lines="none">
+      <ion-checkbox [(ngModel)]="checkOpenNow" color="new" (ionChange)="filterOpenNow()"></ion-checkbox>
+    <ion-label class="ion-padding-left" style="color:#69bb7b; font-size:small;">&nbsp; Show only pharmacies that open now</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+  
+
+
+  <div class="map-wrapper">
+    <div id="updown" (click)="Toggle()">
+      <ion-icon name="caret-down-outline" size="large" color="new" *ngIf="showDown==true"></ion-icon>
+      <ion-icon name="caret-up-outline" size="large" color="new" *ngIf="showUp==true"></ion-icon>
+    </div>
+    <div #searchList id="search-list" *ngIf="showResult==true">
+      <ion-list>
+        <ion-item *ngFor="let pharmacy of pharmacyFilterResult" (click)="goToDetail(pharmacy)">
+          <ion-grid>  
+            <ion-row class="ion-align-items-start">
+              <ion-col size="2">
+                <div>
+                <img src="assets/icon/pharmacyimage.jpg" alt="{{pharmacy.name}}"/>
+              </div>
+              </ion-col>
+              <ion-col size="10">
+                  <h5 style="color:#69bb7b; margin-bottom: 0 !important; font-weight: normal; margin-top: 0 !important; padding-top: 0!important;">{{pharmacy.name}}
+                    <span *ngIf="pharmacy.opennow==true" style="color:#69bb7b; font-size:smaller; margin-left: 15px; font-weight: lighter;">&#10004; open now</span>
+                    <span *ngIf="pharmacy.opennow==false" style="color: red; font-size: smaller; margin-left: 15px; font-weight: lighter;">closed</span>
+                  </h5>
+                  <p id="addressDetail">{{pharmacy.address | lowercase }}<br>
+                  {{pharmacy.distance}} Km Away</p>
+                    <ion-row *ngIf="showMedicineInfo==true">
+                      <p style="font-size: smaller; margin: 0 !important; color:#69bb7b;">&#10004; medicine available</p>
+                    </ion-row>
+                  <ion-row *ngIf="showInsuranceInfo==true">
+                    <p style="font-size: smaller; margin: 0 !important; color:#69bb7b;">&#10004; this pharmacy support your insurance</p>
+                  </ion-row>
+              </ion-col>
+            </ion-row> 
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div id="map_center">
+    </div>
+    <div #map id="map"></div>
+  </div>
+ 
+</ion-content>

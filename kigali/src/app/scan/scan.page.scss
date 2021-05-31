@@ -1,0 +1,49 @@
+.scanHistoryContainer
+  {
+      position: absolute;
+      width: 100%;
+      padding-top: 20px;
+      top: 50px;
+      z-index: 99;
+      background-color: white;
+      height: 150%;
+  }
+
+  .reminderBox
+{
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 0 16px 0 16px;
+}
+
+.delete
+  {
+      font-size: 20px; 
+  }
+
+  .icon {
+    display: inline-block;
+    font-size: 35px;
+    color:  #69bb7b;
+    vertical-align: middle;
+   }
+   
+   .text{
+     display: inline-block;
+     vertical-align: middle;
+     color: #69bb7b;
+   }
+
+   .deleteicon
+   {
+     width: 10%;
+     margin: 16px 0 auto 10px;
+     text-align: center;
+   }
+
+   .remindericon
+   {
+     width: 10%;
+     margin: 16px 0 auto auto;
+     text-align: center;
+   }

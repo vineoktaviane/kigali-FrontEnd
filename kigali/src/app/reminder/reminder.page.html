@@ -1,0 +1,148 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="new">
+    <ion-title>
+      Reminder Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="nextReminderContainer">
+    <h5 class="ion-padding-horizontal"><b>Next reminder</b></h5>
+    <p class="ion-padding-horizontal" style="font-size: smaller; color: grey;" *ngIf="noReminder==true">You dont have upcoming medicine reminder</p>
+    <ion-list *ngFor="let reminder of Data">
+    <div class="reminderBox ion-padding-horizontal">
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col class="ion-no-padding ion-no-margin" size="11">
+            <ion-row class="ion-no-padding ion-no-margin"> 
+              <ion-col size = "2" class="ion-margin-top">
+                <img src="{{reminder.color}}" class="foodicon2" />
+              </ion-col>
+              <ion-col size = "5" class="ion-no-padding ion-no-margin">
+                <h1 style="padding-top: 0px !important; margin-bottom: 0!important; padding-bottom: 0!important;">{{reminder.title}}</h1>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="1" class="ion-no-padding ion-no-margin">
+            <ion-icon name="trash-outline" color="new" class="delete" (click)="deleteReminder(reminder.id)"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <p class="detailReminder">{{reminder.text}}</p>
+    </div>
+    </ion-list>
+    <div *ngIf="showAddButton==true" id="addReminder" (click)="openAddReminder()">
+      <ion-icon name="add-circle" color="new" class="plusButton"></ion-icon>
+    </div>
+  </div>
+  
+  
+  <!-- <div class="addReminderContainer" *ngIf="addReminder==true"> 
+  <h5 class="ion-padding-horizontal"><b>Add reminder</b></h5>
+  <ion-item lines="inset">
+    <ion-label class="labelFilter" color="new" position="stacked">Please enter medicine's name</ion-label>
+    <ion-input clearInput [(ngModel)]="pillNameInput" lines="inset"></ion-input>
+  </ion-item>
+  <ion-item lines="inset">
+    <ion-label class="labelFilter" color="new" position="stacked">How many pills you need to take per time?</ion-label>
+    <ion-input clearInput [(ngModel)]="pillInput" lines="inset" type="number"></ion-input>
+  </ion-item>
+  <ion-item lines="inset">
+    <ion-label class="labelFilter" color="new" position="stacked">For how many days is this medicine?</ion-label>
+    <ion-input clearInput [(ngModel)]="pillDaysInput" lines="inset" type="number"></ion-input>
+  </ion-item>
+    <p class="ion-padding-horizontal question">Food and pills</p>
+    <ion-row class="ion-align-items-start" class="ion-padding-horizontal">
+      <ion-col size="4">
+        <div class="food" (click)="beforeMeal()" [ngClass]="{'unselected':unselectedBeforeMeal,'selected':selectedBeforeMeal}">
+          <img src="assets/icon/utensils-solid.png" class="foodicon" />
+          Before
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="food" (click)="betweenMeal()" [ngClass]="{'unselected':unselectedBetweenMeal,'selected':selectedBetweenMeal}">
+          <img src="assets/icon/between.png" class="foodicon" />
+          Between
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="food" (click)="afterMeal()" [ngClass]="{'unselected':unselectedAfterMeal,'selected':selectedAfterMeal}">
+          <img src="assets/icon/after.png" class="foodicon" />
+          After
+        </div>
+      </ion-col>
+    </ion-row>  
+    <p class="ion-padding-horizontal question">Notification</p>
+    <div>
+        <ion-datetime id="notification" displayFormat="HH:mm" placeholder="set time..." [(ngModel)]="timeset"></ion-datetime>  
+        <ion-button color="new" class="buttonReminder" (click)="setReminder()">Set Reminder</ion-button> 
+        <ion-button color="new" class="buttonReminder" (click)="closeAddReminder()">Close</ion-button>
+    </div>  
+  </div>  -->
+  
+  <div class="addReminderContainer" *ngIf="addReminder==true">
+  <h5 class="ion-padding-horizontal"><b>Add reminder</b></h5>
+  <ion-list lines="inset">
+    <form [formGroup]="mainForm" (ngSubmit)="storeData()">
+      <ion-item lines="inset">
+        <ion-label class="labelFilter" color="new" position="stacked">Please enter medicine's name</ion-label>
+        <ion-input formControlName="title" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset">
+        <ion-label class="labelFilter" color="new" position="stacked">How many pills you need to take per time?</ion-label>
+        <ion-input formControlName="description" type="number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="inset">
+        <ion-label class="labelFilter" color="new" position="stacked">When do you want to set the reminder?</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="date" required></ion-datetime>
+      </ion-item>
+
+      <ion-item lines="inset">
+        <ion-label class="labelFilter" color="new" position="stacked">At what time?</ion-label>
+        <ion-datetime displayFormat="HH:mm" formControlName="time" type="text" required></ion-datetime>
+      </ion-item>
+
+      <!-- <ion-item lines="inset">
+        <ion-label class="labelFilter" position="stacked" color="new">Repeat this notification?</ion-label>
+        <ion-select interface="popover" formControlName="repeatNotification" (ionChange)="try()">
+        <ion-select-option value="">One time only</ion-select-option>
+        <ion-select-option value="minute">Every Minute</ion-select-option>
+        <ion-select-option value="hour">Hour</ion-select-option>
+        <ion-select-option value="day">Day</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+
+      <ion-row class="ion-align-items-start" class="ion-padding-vertical">
+        <ion-col size="3">
+          <div class="food" (click)="beforeMeal()" [ngClass]="{'unselected':unselectedBeforeMeal,'selected':selectedBeforeMeal}">
+            <img src="assets/icon/utensils-solid.png" class="foodicon" />
+            Before
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="food" (click)="betweenMeal()" [ngClass]="{'unselected':unselectedBetweenMeal,'selected':selectedBetweenMeal}">
+            <img src="assets/icon/between.png" class="foodicon" />
+            Between
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="food" (click)="afterMeal()" [ngClass]="{'unselected':unselectedAfterMeal,'selected':selectedAfterMeal}">
+            <img src="assets/icon/after.png" class="foodicon" />
+            After
+          </div>
+        </ion-col>
+      </ion-row>  
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="new" class="buttonReminder">Set Reminder</ion-button> 
+        <ion-button color="new" class="buttonReminder" (click)="closeAddReminder()">Close</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+  </div>
+
+</ion-content>

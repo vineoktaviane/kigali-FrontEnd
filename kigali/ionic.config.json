@@ -1,0 +1,7 @@
+{
+  "name": "kigali",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
